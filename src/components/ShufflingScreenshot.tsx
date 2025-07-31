@@ -2,24 +2,36 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
-interface AppScreenshotProps {
-  src: string;
+interface ShufflingScreenshotProps {
+  src1: string;
+  src2: string;
   alt: string;
   delay?: number;
   className?: string;
-  width?: number;
-  height?: number;
+  shuffleInterval?: number;
 }
 
-export default function AppScreenshot({ 
-  src, 
+export default function ShufflingScreenshot({ 
+  src1, 
+  src2, 
   alt, 
   delay = 0, 
   className = "",
-  width = 256,
-  height = 500
-}: AppScreenshotProps) {
+  shuffleInterval = 3000
+}: ShufflingScreenshotProps) {
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = [src1, src2];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev === 0 ? 1 : 0));
+    }, shuffleInterval);
+
+    return () => clearInterval(interval);
+  }, [shuffleInterval]);
+
   return (
     <motion.div
       className={`relative mx-auto ${className}`}
@@ -44,16 +56,24 @@ export default function AppScreenshot({
               </div>
             </div>
             
-            {/* App Content - Full Screen */}
+            {/* App Content - Full Screen with Shuffling */}
             <div className="absolute inset-0">
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 256px"
-                priority
-              />
+              <motion.div
+                key={currentImage}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={images[currentImage]}
+                  alt={`${alt} - View ${currentImage + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 256px"
+                  priority
+                />
+              </motion.div>
             </div>
           </div>
         </div>

@@ -14,6 +14,7 @@ import {
 import LottieBackground from "../components/LottieBackground";
 import PlaceholderScreenshot from "../components/PlaceholderScreenshot";
 import AppScreenshot from "../components/AppScreenshot";
+import ShufflingScreenshot from "../components/ShufflingScreenshot";
 import Logo from "../components/Logo";
 
 export default function Home() {
@@ -38,14 +39,14 @@ export default function Home() {
       icon: Users,
       color: "from-blue-500 to-cyan-500",
       highlight: "Instant detection"
-    },
-    {
-      title: "Achievements Dashboard",
-      description: "Track deleted photos and MB saved. Celebrate progress.",
-      icon: Award,
-      color: "from-green-500 to-emerald-500",
-      highlight: "Track your progress"
     }
+    // {
+    //   title: "Achievements Dashboard",
+    //   description: "Track deleted photos and MB saved. Celebrate progress.",
+    //   icon: Award,
+    //   color: "from-green-500 to-emerald-500",
+    //   highlight: "Track your progress"
+    // }
   ];
 
   const detailedFeatures = [
@@ -76,14 +77,18 @@ export default function Home() {
       }
     },
     {
-      title: "Progress Tracking",
-      subtitle: "Celebrate your cleanup journey",
-      description: "Track your photo cleanup progress with detailed statistics. See how much space you've reclaimed and celebrate your achievements along the way.",
+      title: "Best Shot Selection",
+      subtitle: "Always keep your sharpest, most beautiful photos",
+      description: "PixieClean automatically identifies the clearest, most vibrant photo from every group of similar shots — so you never have to scroll and compare again.",
       icon: Award,
-      stats: ["Real-time stats", "Achievement badges", "Storage insights"],
+      stats: ["AI-powered photo quality detection", "Highlighted \"Best Shot\" badge", "One-tap keep & delete options"],
       screenshot: {
-        title: "Progress Dashboard",
-        description: "Track your cleanup journey"
+        title: "Best Shot Selector",
+        description: "AI-powered best shot detection",
+        src1: "/images/screenshots/best-shot-selector1.PNG",
+        src2: "/images/screenshots/best-shot-selector2.PNG",
+        alt: "Best Shot Selector Screenshot",
+        isShuffling: true
       }
     }
   ];
@@ -185,7 +190,7 @@ export default function Home() {
             What PixieClean Does
           </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -261,7 +266,15 @@ export default function Home() {
                 
                 {/* Screenshot */}
                 <div className="flex-1 flex justify-center">
-                  {feature.screenshot.src ? (
+                  {feature.screenshot.isShuffling ? (
+                    <ShufflingScreenshot
+                      src1={feature.screenshot.src1}
+                      src2={feature.screenshot.src2}
+                      alt={feature.screenshot.alt}
+                      delay={0.2}
+                      shuffleInterval={4000}
+                    />
+                  ) : feature.screenshot.src ? (
                     <AppScreenshot
                       src={feature.screenshot.src}
                       alt={feature.screenshot.alt}
