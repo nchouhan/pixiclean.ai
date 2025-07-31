@@ -11,6 +11,7 @@ import {
   Award,
   ArrowRight
 } from "lucide-react";
+import Link from "next/link";
 import LottieBackground from "../components/LottieBackground";
 import PlaceholderScreenshot from "../components/PlaceholderScreenshot";
 import AppScreenshot from "../components/AppScreenshot";
@@ -373,9 +374,9 @@ export default function Home() {
             </div>
             
             <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
-              <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="/support" className="hover:text-white transition-colors">Help & Support</a>
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="/support" className="hover:text-white transition-colors">Help & Support</Link>
             </div>
           </motion.div>
         </div>
