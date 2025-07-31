@@ -8,17 +8,13 @@ interface AppScreenshotProps {
   alt: string;
   delay?: number;
   className?: string;
-  width?: number;
-  height?: number;
 }
 
 export default function AppScreenshot({ 
   src, 
   alt, 
   delay = 0, 
-  className = "",
-  width = 256,
-  height = 500
+  className = ""
 }: AppScreenshotProps) {
   return (
     <motion.div

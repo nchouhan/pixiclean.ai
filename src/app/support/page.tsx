@@ -17,7 +17,7 @@ export default function SupportPage() {
 
         <div className="prose prose-invert max-w-none">
           <p className="text-gray-300 mb-8 text-lg">
-            Need help with PixieClean? We're here to help you get the most out of your photo cleanup experience.
+            Need help with PixieClean? We&apos;re here to help you get the most out of your photo cleanup experience.
           </p>
 
           {/* Quick Help Section */}
@@ -60,7 +60,7 @@ export default function SupportPage() {
             <div className="bg-gray-800/30 rounded-lg p-6 border border-gray-700/30">
               <h3 className="text-xl font-semibold mb-3">Can I recover deleted photos?</h3>
               <p className="text-gray-300">
-                PixieClean permanently deletes photos from your device. We recommend backing up your photos before using the app. You can use your device's backup features or cloud storage services to ensure your photos are safely stored.
+                PixieClean permanently deletes photos from your device. We recommend backing up your photos before using the app. You can use your device&apos;s backup features or cloud storage services to ensure your photos are safely stored.
               </p>
             </div>
 
@@ -81,7 +81,7 @@ export default function SupportPage() {
             <div className="bg-gray-800/30 rounded-lg p-6 border border-gray-700/30">
               <h3 className="text-xl font-semibold mb-3">How much storage can I save?</h3>
               <p className="text-gray-300">
-                The amount of storage you can save depends on your photo library. Users typically save 20-60% of their photo storage space. The app shows you exactly how much space you'll save before processing.
+                The amount of storage you can save depends on your photo library. Users typically save 20-60% of their photo storage space. The app shows you exactly how much space you&apos;ll save before processing.
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function SupportPage() {
               <div>
                 <h4 className="text-lg font-semibold mb-3 text-purple-400">Step 3: Start Scanning</h4>
                 <p className="text-gray-300 mb-4">
-                  Tap "Start Scan" to begin analyzing your photo library. The app will identify duplicates and similar photos.
+                  Tap &quot;Start Scan&quot; to begin analyzing your photo library. The app will identify duplicates and similar photos.
                 </p>
               </div>
               <div>
@@ -130,10 +130,10 @@ export default function SupportPage() {
                 For technical issues, feature requests, or general questions, reach out to our support team.
               </p>
               <a
-                href="mailto:support@pixiclean.ai"
+                href="mailto:support@mypixie.app"
                 className="text-purple-400 hover:text-purple-300 transition-colors"
               >
-                support@pixiclean.ai
+                support@mypixie.app
               </a>
             </div>
 

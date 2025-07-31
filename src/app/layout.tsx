@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mypixie.app"),
   title: "PixieClean - Clean, Organize & Optimize Your Photos",
   description: "AI-powered mobile app that helps you effortlessly declutter, organize, and optimize your photo galleries — all while keeping your data 100% private on-device.",
   keywords: "photo cleanup, duplicate photos, photo optimization, mobile app, iOS, Android",

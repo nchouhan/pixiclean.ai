@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             PixieClean processes all your photos locally on your device. We do not upload, store, or transmit any of your photos to external servers. All processing happens securely on your device using advanced AI algorithms.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4">What We Don't Collect</h2>
+          <h2 className="text-2xl font-semibold mt-8 mb-4">What We Don&apos;t Collect</h2>
           <ul className="text-gray-300 mb-6 list-disc list-inside space-y-2">
             <li>Your photos or image data</li>
             <li>Personal information</li>
@@ -64,14 +64,14 @@ export default function PrivacyPage() {
             Since all processing happens on your device, your photos are never transmitted over the internet. This provides the highest level of security for your personal data.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4">Children's Privacy</h2>
+          <h2 className="text-2xl font-semibold mt-8 mb-4">Children&apos;s Privacy</h2>
           <p className="text-gray-300 mb-6">
             PixieClean does not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Changes to This Policy</h2>
           <p className="text-gray-300 mb-6">
-            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the &quot;Last updated&quot; date.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Contact Us</h2>

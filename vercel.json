@@ -1,8 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "regions": ["iad1"],
   "headers": [
     {
       "source": "/(.*)",
@@ -14,6 +10,10 @@
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
         }
       ]
     }

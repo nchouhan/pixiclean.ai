@@ -17,7 +17,7 @@ export default function TermsPage() {
 
         <div className="prose prose-invert max-w-none">
           <p className="text-gray-300 mb-6">
-            These Terms of Service ("Terms") govern your use of the PixieClean mobile application ("App"). By downloading, installing, or using the App, you agree to be bound by these Terms.
+            These Terms of Service (&quot;Terms&quot;) govern your use of the PixieClean mobile application (&quot;App&quot;). By downloading, installing, or using the App, you agree to be bound by these Terms.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">1. Acceptance of Terms</h2>
@@ -59,7 +59,7 @@ export default function TermsPage() {
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">7. Disclaimers</h2>
           <p className="text-gray-300 mb-6">
-            THE APP IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+            THE APP IS PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">8. Limitation of Liability</h2>
@@ -69,7 +69,7 @@ export default function TermsPage() {
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">9. App Store Terms</h2>
           <p className="text-gray-300 mb-6">
-            These Terms are between you and PixieClean, not with the App Store or Google Play Store. The stores are not responsible for the App and its content. You must comply with the applicable store's terms of service.
+            These Terms are between you and PixieClean, not with the App Store or Google Play Store. The stores are not responsible for the App and its content. You must comply with the applicable store&apos;s terms of service.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">10. Updates and Modifications</h2>
