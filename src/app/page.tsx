@@ -16,6 +16,7 @@ import LottieBackground from "../components/LottieBackground";
 import PlaceholderScreenshot from "../components/PlaceholderScreenshot";
 import AppScreenshot from "../components/AppScreenshot";
 import ShufflingScreenshot from "../components/ShufflingScreenshot";
+import MultiShufflingScreenshot from "../components/MultiShufflingScreenshot";
 import Logo from "../components/Logo";
 
 export default function Home() {
@@ -60,8 +61,13 @@ export default function Home() {
       screenshot: {
         title: "Duplicate Detection",
         description: "AI-powered duplicate finder",
-        src: "/images/screenshots/duplicate-detection.png",
-        alt: "Duplicate Detection Screenshot"
+        images: [
+          "/images/screenshots/duplicate-detection1.png",
+          "/images/screenshots/duplicate-detection2.png",
+          "/images/screenshots/duplicate-detection3.png"
+        ],
+        alt: "Duplicate Detection Screenshot",
+        isMultiShuffling: true
       }
     },
     {
@@ -73,8 +79,13 @@ export default function Home() {
       screenshot: {
         title: "Device Optimization",
         description: "Smart resizing for any device",
-        src: "/images/screenshots/device-optimisation.png",
-        alt: "Device Optimization Screenshot"
+        images: [
+          "/images/screenshots/device-optimisation1.png",
+          "/images/screenshots/device-optimisation2.png",
+          "/images/screenshots/device-optimisation3.png"
+        ],
+        alt: "Device Optimization Screenshot",
+        isMultiShuffling: true
       }
     },
     {
@@ -267,7 +278,14 @@ export default function Home() {
                 
                 {/* Screenshot */}
                 <div className="flex-1 flex justify-center">
-                  {feature.screenshot.isShuffling ? (
+                  {feature.screenshot.isMultiShuffling ? (
+                    <MultiShufflingScreenshot
+                      images={feature.screenshot.images}
+                      alt={feature.screenshot.alt}
+                      delay={0.2}
+                      shuffleInterval={4000}
+                    />
+                  ) : feature.screenshot.isShuffling ? (
                     <ShufflingScreenshot
                       src1={feature.screenshot.src1}
                       src2={feature.screenshot.src2}
@@ -275,9 +293,9 @@ export default function Home() {
                       delay={0.2}
                       shuffleInterval={4000}
                     />
-                  ) : feature.screenshot.src ? (
+                  ) : feature.screenshot.src1 ? (
                     <AppScreenshot
-                      src={feature.screenshot.src}
+                      src={feature.screenshot.src1}
                       alt={feature.screenshot.alt}
                       delay={0.2}
                     />
