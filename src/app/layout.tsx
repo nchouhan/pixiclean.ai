@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "PixieClean - Clean, Organize & Optimize Your Photos",
     description: "AI-powered mobile app that helps you effortlessly declutter, organize, and optimize your photo galleries — all while keeping your data 100% private on-device.",
     type: "website",
-    url: "https://pixiclean.ai",
+    url: "https://mypixie.app",
     images: ["/images/icons/logo-min.png"],
   },
   twitter: {
