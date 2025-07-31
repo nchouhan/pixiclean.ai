@@ -22,25 +22,25 @@ import Logo from "../components/Logo";
 export default function Home() {
   const features = [
     {
-      title: "Best Shot Selector",
-      description: "Automatically picks your best photo in every group.",
+      title: "Find Your Perfect Shot",
+      description: "No more comparing burst photos. We'll instantly find the one where everyone looks great",
       icon: Star,
       color: "from-purple-500 to-pink-500",
-      highlight: "AI-powered selection"
+      highlight: "AI-powered perfection"
     },
     {
-      title: "Device-Based Optimization",
-      description: "Resize smartly for phone, laptop or TV — save space.",
+      title: "Smart Space Saver",
+      description: "Resize photos for any screen (phone, TV, laptop) without losing quality.",
       icon: Smartphone,
       color: "from-orange-500 to-red-500",
       highlight: "Save up to 90% space"
     },
     {
-      title: "Duplicate Grouping",
-      description: "Detect near and exact duplicates in one tap.",
+      title: "Duplicate Cleaner",
+      description: "Instantly find and remove similar & identical photos.",
       icon: Users,
       color: "from-blue-500 to-cyan-500",
-      highlight: "Instant detection"
+      highlight: "One-tap cleaning"
     }
     // {
     //   title: "Achievements Dashboard",
@@ -54,10 +54,10 @@ export default function Home() {
   const detailedFeatures = [
     {
       title: "Smart Duplicate Detection",
-      subtitle: "Find and remove duplicates instantly",
-      description: "PixieClean uses advanced AI to identify exact and near-duplicate photos, helping you keep only the best shots while freeing up valuable storage space.",
+      subtitle: "AI-powered precision that finds and removes clutter, so you don't have to.",
+      description: "PixieClean uses on-device AI to detect both exact and near-duplicate photos in seconds. Keep the best, delete the rest — and free up space instantly.",
       icon: Star,
-      stats: ["90% faster", "100% accurate", "On-device processing"],
+      stats: ["✅ 90% faster", "🧠 AI-Level Accuracy", "🔒 100% On-Device"],
       screenshot: {
         title: "Duplicate Detection",
         description: "AI-powered duplicate finder",
@@ -72,10 +72,10 @@ export default function Home() {
     },
     {
       title: "Device-Based Optimization",
-      subtitle: "Optimize for your viewing device",
-      description: "Choose your target device — phone, laptop, or 4K TV — and let PixieClean automatically resize your photos for optimal viewing while saving storage space.",
+      subtitle: "Choose your screen. PixieClean does the rest.",
+      description: "Pick where you’ll view your photos — phone, laptop, or TV — and PixieClean resizes them automatically to balance clarity and storage savings.",
       icon: Smartphone,
-      stats: ["Save up to 90% space", "Maintain quality", "Multiple device support"],
+      stats: ["💾 Save up to 90% space", "🔍 Maintain quality", "📱💻📺 Built for all screens"],
       screenshot: {
         title: "Device Optimization",
         description: "Smart resizing for any device",
@@ -91,9 +91,9 @@ export default function Home() {
     {
       title: "Best Shot Selection",
       subtitle: "Always keep your sharpest, most beautiful photos",
-      description: "PixieClean automatically identifies the clearest, most vibrant photo from every group of similar shots — so you never have to scroll and compare again.",
+      description: "PixieClean’s AI finds the sharpest, most vibrant photo from every group — so you can skip the scroll, and keep the moments that matter.",
       icon: Award,
-      stats: ["AI-powered photo quality detection", "Highlighted \"Best Shot\" badge", "One-tap keep & delete options"],
+      stats: ["🔍 Smarter than burst mode", "⭐ “Best Shot” badge built-in", "✅ One-tap keep or delete"],
       screenshot: {
         title: "Best Shot Selector",
         description: "AI-powered best shot detection",
@@ -108,18 +108,18 @@ export default function Home() {
   const differentiators = [
     {
       icon: Shield,
-      title: "On-Device & Private",
-      description: "Your data stays with you. No cloud, no risk."
+      title: "Private by Design",
+      description: "Your photos stay on your phone — 100% private, 0% cloud risk."
     },
     {
       icon: Zap,
-      title: "Fast & Simple",
-      description: "Clean up hundreds of photos in just seconds."
+      title: "Clean in Seconds",
+      description: "Clean up 1,000 photos in minutes — no cloud, no lag."
     },
     {
       icon: Sparkles,
       title: "Designed for Delight",
-      description: "Every detail crafted for a joyful experience."
+      description: "From swipes to sparkles, every interaction is joyful. Pixie is built for the love of photos."
     }
   ];
 
@@ -153,7 +153,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Reclaim your gallery. Clean, Organise, Optimise — all on-device.
+            Love your photo library again. Effortlessly Clean, Organise, Optimise — all on-device.
           </motion.p>
           
           <motion.div 
@@ -199,7 +199,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            What PixieClean Does
+            Smarter Photo Cleanup Starts Here
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -235,7 +235,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Powerful Features
+            Pixie in Action
           </motion.h2>
           
           <div className="space-y-20">
@@ -323,7 +323,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Why PixieClean
+            Built to Delight. Designed to Protect.
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
