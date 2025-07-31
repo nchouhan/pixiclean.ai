@@ -1,0 +1,372 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { 
+  Shield, 
+  Zap, 
+  Sparkles, 
+  Star, 
+  Smartphone, 
+  Users, 
+  Award,
+  ArrowRight
+} from "lucide-react";
+import LottieBackground from "../components/LottieBackground";
+import PlaceholderScreenshot from "../components/PlaceholderScreenshot";
+import AppScreenshot from "../components/AppScreenshot";
+import Logo from "../components/Logo";
+
+export default function Home() {
+  const features = [
+    {
+      title: "Best Shot Selector",
+      description: "Automatically picks your best photo in every group.",
+      icon: Star,
+      color: "from-purple-500 to-pink-500",
+      highlight: "AI-powered selection"
+    },
+    {
+      title: "Device-Based Optimization",
+      description: "Resize smartly for phone, laptop or TV — save space.",
+      icon: Smartphone,
+      color: "from-orange-500 to-red-500",
+      highlight: "Save up to 90% space"
+    },
+    {
+      title: "Duplicate Grouping",
+      description: "Detect near and exact duplicates in one tap.",
+      icon: Users,
+      color: "from-blue-500 to-cyan-500",
+      highlight: "Instant detection"
+    },
+    {
+      title: "Achievements Dashboard",
+      description: "Track deleted photos and MB saved. Celebrate progress.",
+      icon: Award,
+      color: "from-green-500 to-emerald-500",
+      highlight: "Track your progress"
+    }
+  ];
+
+  const detailedFeatures = [
+    {
+      title: "Smart Duplicate Detection",
+      subtitle: "Find and remove duplicates instantly",
+      description: "PixieClean uses advanced AI to identify exact and near-duplicate photos, helping you keep only the best shots while freeing up valuable storage space.",
+      icon: Star,
+      stats: ["90% faster", "100% accurate", "On-device processing"],
+      screenshot: {
+        title: "Duplicate Detection",
+        description: "AI-powered duplicate finder",
+        src: "/images/screenshots/duplicate-detection.png",
+        alt: "Duplicate Detection Screenshot"
+      }
+    },
+    {
+      title: "Device-Based Optimization",
+      subtitle: "Optimize for your viewing device",
+      description: "Choose your target device — phone, laptop, or 4K TV — and let PixieClean automatically resize your photos for optimal viewing while saving storage space.",
+      icon: Smartphone,
+      stats: ["Save up to 90% space", "Maintain quality", "Multiple device support"],
+      screenshot: {
+        title: "Device Optimization",
+        description: "Smart resizing for any device",
+        src: "/images/screenshots/device-optimisation.png",
+        alt: "Device Optimization Screenshot"
+      }
+    },
+    {
+      title: "Progress Tracking",
+      subtitle: "Celebrate your cleanup journey",
+      description: "Track your photo cleanup progress with detailed statistics. See how much space you've reclaimed and celebrate your achievements along the way.",
+      icon: Award,
+      stats: ["Real-time stats", "Achievement badges", "Storage insights"],
+      screenshot: {
+        title: "Progress Dashboard",
+        description: "Track your cleanup journey"
+      }
+    }
+  ];
+
+  const differentiators = [
+    {
+      icon: Shield,
+      title: "On-Device & Private",
+      description: "Your data stays with you. No cloud, no risk."
+    },
+    {
+      icon: Zap,
+      title: "Fast & Simple",
+      description: "Clean up hundreds of photos in just seconds."
+    },
+    {
+      icon: Sparkles,
+      title: "Designed for Delight",
+      description: "Every detail crafted for a joyful experience."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-blue-900"></div>
+        
+        {/* Lottie Animation Background */}
+        <LottieBackground className="z-0" />
+        
+        {/* Content Overlay */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          {/* Logo */}
+          <Logo className="mx-auto mb-8" size={120} />
+          
+          <motion.h1 
+            className="text-6xl md:text-8xl font-bold mb-6"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Moments Matter.
+          </motion.h1>
+          
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Reclaim your gallery. Clean, Organise, Optimise — all on-device.
+          </motion.p>
+          
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <a 
+              href="https://apps.apple.com/in/app/pixieclean/id6745176117"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 glow-hover"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              Download on App Store
+            </a>
+            
+            <a 
+              href="https://play.google.com/store/apps/details?id=com.nclab.pixieclean"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 glow-hover"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              </svg>
+              Get it on Google Play
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Overview Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-black to-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            What PixieClean Does
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-4`}>
+                  <feature.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-400 mb-3">{feature.description}</p>
+                <span className="text-sm text-purple-400 font-medium">{feature.highlight}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Features Section */}
+      <section className="py-20 px-4 bg-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Powerful Features
+          </motion.h2>
+          
+          <div className="space-y-20">
+            {detailedFeatures.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                {/* Content */}
+                <div className="flex-1 space-y-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                      <feature.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold">{feature.title}</h3>
+                      <p className="text-purple-400 font-medium">{feature.subtitle}</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    {feature.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    {feature.stats.map((stat, statIndex) => (
+                      <span
+                        key={statIndex}
+                        className="px-4 py-2 bg-gray-800/50 rounded-full text-sm font-medium border border-gray-700/50"
+                      >
+                        {stat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Screenshot */}
+                <div className="flex-1 flex justify-center">
+                  {feature.screenshot.src ? (
+                    <AppScreenshot
+                      src={feature.screenshot.src}
+                      alt={feature.screenshot.alt}
+                      delay={0.2}
+                    />
+                  ) : (
+                    <PlaceholderScreenshot
+                      title={feature.screenshot.title}
+                      description={feature.screenshot.description}
+                      delay={0.2}
+                    />
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why PixieClean Section */}
+      <section className="py-20 px-4 bg-black">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Why PixieClean
+          </motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {differentiators.map((item, index) => (
+              <motion.div
+                key={item.title}
+                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <item.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
+                <p className="text-gray-400 text-lg">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-black to-purple-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Get PixieClean
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Every photo cleaned is a memory made brighter ✨
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <a 
+                href="https://apps.apple.com/in/app/pixieclean/id6745176117"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 glow-hover"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Download on App Store
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.nclab.pixieclean"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-300 glow-hover"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                Get it on Google Play
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+              <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="/support" className="hover:text-white transition-colors">Help & Support</a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
