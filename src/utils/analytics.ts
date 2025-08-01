@@ -1,15 +1,35 @@
 // Google Analytics tracking utilities
+type GtagCommand = 'config' | 'event' | 'js' | 'set';
+type GtagConfigParams = {
+  page_path?: string;
+  page_title?: string;
+  page_location?: string;
+  send_page_view?: boolean;
+  allow_google_signals?: boolean;
+  allow_ad_personalization_signals?: boolean;
+  cookie_flags?: string;
+};
+
+type GtagEventParams = {
+  event_category?: string;
+  event_label?: string;
+  event_action?: string;
+  value?: number;
+  send_to?: string;
+  [key: string]: string | number | boolean | undefined;
+};
+
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
+    gtag: (command: GtagCommand, targetId: string | Date, params?: GtagConfigParams | GtagEventParams | Record<string, unknown>) => void;
+    dataLayer: Record<string, unknown>[];
   }
 }
 
 // Initialize gtag if not available
-export const gtag = (...args: any[]) => {
+export const gtag = (command: GtagCommand, targetId: string | Date, params?: GtagConfigParams | GtagEventParams | Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag(...args);
+    window.gtag(command, targetId, params);
   }
 };
 

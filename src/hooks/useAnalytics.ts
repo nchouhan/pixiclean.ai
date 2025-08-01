@@ -63,7 +63,6 @@ export const useSectionTracking = (sectionName: string, threshold = 0.5) => {
 export const useEngagementTracking = () => {
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
-    let lastScrollY = 0;
     let maxScroll = 0;
 
     const handleScroll = () => {
@@ -86,8 +85,6 @@ export const useEngagementTracking = () => {
           trackSectionView('scroll_90_percent');
         }
       }
-
-      lastScrollY = currentScrollY;
 
       // Clear existing timeout
       clearTimeout(scrollTimeout);
@@ -184,7 +181,7 @@ export const useDeviceTracking = () => {
 
       // Track connection type if available
       if ('connection' in navigator) {
-        const connection = (navigator as any).connection;
+        const connection = (navigator as { connection?: { effectiveType?: string } }).connection;
         if (connection?.effectiveType) {
           trackSectionView(`connection_${connection.effectiveType}`);
         }

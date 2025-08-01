@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from 'next/script';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -163,28 +164,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-7MT1F0ZMGP"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-7MT1F0ZMGP', {
-                page_title: document.title,
-                page_location: window.location.href,
-                send_page_view: true,
-                allow_google_signals: true,
-                allow_ad_personalization_signals: true,
-                cookie_flags: 'SameSite=None;Secure'
-              });
-            `,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -193,6 +172,26 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7MT1F0ZMGP"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-7MT1F0ZMGP', {
+              page_title: document.title,
+              page_location: window.location.href,
+              send_page_view: true,
+              allow_google_signals: true,
+              allow_ad_personalization_signals: true,
+              cookie_flags: 'SameSite=None;Secure'
+            });
+          `}
+        </Script>
         {children}
       </body>
     </html>
