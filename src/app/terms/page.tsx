@@ -1,34 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import { usePageTracking, useEngagementTracking, useVisibilityTracking } from "../../hooks/useAnalytics";
+import { trackFeatureInteraction } from "../../utils/analytics";
 
-export const metadata: Metadata = {
-  title: "Terms of Service - PixieClean",
-  description: "Read PixieClean's terms of service. Understand user responsibilities, data processing policies, and legal terms for using our photo cleanup app.",
-  keywords: "terms of service, legal terms, user agreement, photo app terms, mobile app terms",
-  openGraph: {
-    title: "Terms of Service - PixieClean",
-    description: "Read PixieClean's terms of service and understand our legal terms for using the photo cleanup app.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Terms of Service - PixieClean",
-    description: "Read PixieClean's terms of service for the photo cleanup app.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+
 
 export default function TermsPage() {
+  // Analytics hooks
+  usePageTracking();
+  useEngagementTracking();
+  useVisibilityTracking();
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-8"
+          onClick={() => trackFeatureInteraction('Back to Home', 'navigation_click', 'terms_page')}
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home

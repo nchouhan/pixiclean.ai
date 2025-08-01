@@ -1,34 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import { usePageTracking, useEngagementTracking, useVisibilityTracking } from "../../hooks/useAnalytics";
+import { trackFeatureInteraction } from "../../utils/analytics";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy - PixieClean",
-  description: "Learn how PixieClean protects your privacy with 100% on-device photo processing. No data collection, no cloud uploads - your photos stay private.",
-  keywords: "privacy policy, data protection, on-device processing, photo privacy, AI photo cleanup",
-  openGraph: {
-    title: "Privacy Policy - PixieClean",
-    description: "Learn how PixieClean protects your privacy with 100% on-device photo processing. No data collection, no cloud uploads - your photos stay private.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Privacy Policy - PixieClean",
-    description: "Learn how PixieClean protects your privacy with 100% on-device photo processing.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+
 
 export default function PrivacyPage() {
+  // Analytics hooks
+  usePageTracking();
+  useEngagementTracking();
+  useVisibilityTracking();
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-8"
+          onClick={() => trackFeatureInteraction('Back to Home', 'navigation_click', 'privacy_page')}
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home

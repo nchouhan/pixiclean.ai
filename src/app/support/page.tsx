@@ -1,34 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft, Mail, MessageCircle, HelpCircle, Shield, Zap, Sparkles } from "lucide-react";
-import type { Metadata } from "next";
+import { usePageTracking, useEngagementTracking, useVisibilityTracking } from "../../hooks/useAnalytics";
+import { trackFeatureInteraction, trackContactInteraction } from "../../utils/analytics";
 
-export const metadata: Metadata = {
-  title: "Help & Support - PixieClean",
-  description: "Get help with PixieClean photo cleanup app. Find FAQs, tutorials, and contact support for photo organization, duplicate detection, and optimization questions.",
-  keywords: "support, help, FAQ, photo cleanup help, duplicate detection support, contact support",
-  openGraph: {
-    title: "Help & Support - PixieClean",
-    description: "Get help with PixieClean photo cleanup app. Find FAQs, tutorials, and contact support for photo organization questions.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Help & Support - PixieClean",
-    description: "Get help with PixieClean photo cleanup app. Find FAQs and contact support.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+
 
 export default function SupportPage() {
+  // Analytics hooks
+  usePageTracking();
+  useEngagementTracking();
+  useVisibilityTracking();
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors mb-8"
+          onClick={() => trackFeatureInteraction('Back to Home', 'navigation_click', 'support_page')}
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
@@ -153,6 +143,7 @@ export default function SupportPage() {
               <a
                 href="mailto:support@mypixie.app"
                 className="text-purple-400 hover:text-purple-300 transition-colors"
+                onClick={() => trackContactInteraction('email', 'support_page')}
               >
                 support@mypixie.app
               </a>
@@ -170,6 +161,7 @@ export default function SupportPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300 transition-colors"
+                  onClick={() => trackFeatureInteraction('iOS App Store Review', 'external_link_click', 'support_page')}
                 >
                   App Store
                 </a>
@@ -178,6 +170,7 @@ export default function SupportPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-purple-400 hover:text-purple-300 transition-colors"
+                  onClick={() => trackFeatureInteraction('Android Play Store Review', 'external_link_click', 'support_page')}
                 >
                   Google Play
                 </a>
@@ -192,6 +185,7 @@ export default function SupportPage() {
             <Link
               href="/privacy"
               className="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:bg-gray-800/70"
+              onClick={() => trackFeatureInteraction('Privacy Policy', 'internal_link_click', 'support_page')}
             >
               <Shield className="w-8 h-8 text-purple-400 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Privacy Policy</h3>
@@ -201,6 +195,7 @@ export default function SupportPage() {
             <Link
               href="/terms"
               className="bg-gray-800/50 rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:bg-gray-800/70"
+              onClick={() => trackFeatureInteraction('Terms of Service', 'internal_link_click', 'support_page')}
             >
               <Zap className="w-8 h-8 text-purple-400 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Terms of Service</h3>

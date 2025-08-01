@@ -163,6 +163,28 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7MT1F0ZMGP"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-7MT1F0ZMGP', {
+                page_title: document.title,
+                page_location: window.location.href,
+                send_page_view: true,
+                allow_google_signals: true,
+                allow_ad_personalization_signals: true,
+                cookie_flags: 'SameSite=None;Secure'
+              });
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
