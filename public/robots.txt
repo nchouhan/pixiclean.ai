@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow access to admin or private areas (none currently)
+# Disallow: /admin
+
+# Sitemap location
+Sitemap: https://mypixie.app/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1

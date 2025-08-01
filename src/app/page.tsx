@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { Metadata } from "next";
 import { 
   Shield, 
   Zap, 
@@ -124,7 +125,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+            <div className="min-h-screen bg-black text-white" itemScope itemType="https://schema.org/WebPage">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Gradient */}
@@ -143,6 +144,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            itemProp="headline"
           >
             Moments Matter.
           </motion.h1>
