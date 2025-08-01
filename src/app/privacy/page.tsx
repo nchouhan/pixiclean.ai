@@ -36,11 +36,24 @@ export default function PrivacyPage() {
             PixieClean processes all your photos locally on your device. We do not upload, store, or transmit any of your photos to external servers. All processing happens securely on your device using advanced AI algorithms.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4">What We Don&apos;t Collect</h2>
+          <h2 className="text-2xl font-semibold mt-8 mb-4">Cookie Usage</h2>
+          <p className="text-gray-300 mb-6">
+            We use cookies to enhance your experience on our website. We categorize cookies into different types:
+          </p>
+          <ul className="text-gray-300 mb-6 list-disc list-inside space-y-2">
+            <li><strong>Necessary Cookies:</strong> Essential for the website to function properly</li>
+            <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website (only with your consent)</li>
+            <li><strong>Marketing Cookies:</strong> Used for advertising and social media features (only with your consent)</li>
+            <li><strong>Preference Cookies:</strong> Remember your choices and settings (only with your consent)</li>
+          </ul>
+          <p className="text-gray-300 mb-6">
+            You can manage your cookie preferences at any time using our cookie settings tool available in the website footer.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4">What We Don&apos;t Collect from the App</h2>
           <ul className="text-gray-300 mb-6 list-disc list-inside space-y-2">
             <li>Your photos or image data</li>
             <li>Personal information</li>
-            <li>Usage analytics</li>
             <li>Device identifiers</li>
             <li>Location data</li>
             <li>Contact information</li>
@@ -60,6 +73,11 @@ export default function PrivacyPage() {
             All of this processing happens entirely on your device. No data leaves your phone or tablet.
           </p>
 
+          <h2 className="text-2xl font-semibold mt-8 mb-4">Website Analytics</h2>
+          <p className="text-gray-300 mb-6">
+            With your consent, we use Google Analytics to understand how visitors use our website. This helps us improve our site and content. This data is anonymized and does not personally identify you. You can opt-out of analytics tracking through our cookie consent banner.
+          </p>
+
           <h2 className="text-2xl font-semibold mt-8 mb-4">App Store Analytics</h2>
           <p className="text-gray-300 mb-6">
             We may receive basic analytics from the App Store and Google Play Store, such as download numbers and crash reports. This data is provided by the stores themselves and does not contain any personal information or photo data.
@@ -72,7 +90,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Data Security</h2>
           <p className="text-gray-300 mb-6">
-            Since all processing happens on your device, your photos are never transmitted over the internet. This provides the highest level of security for your personal data.
+            Since all app processing happens on your device, your photos are never transmitted over the internet. This provides the highest level of security for your personal data. For our website, we use industry-standard security measures to protect any data we collect through cookies (with your consent).
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Children&apos;s Privacy</h2>

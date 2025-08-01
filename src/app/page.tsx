@@ -18,6 +18,7 @@ import AppScreenshot from "../components/AppScreenshot";
 import ShufflingScreenshot from "../components/ShufflingScreenshot";
 import MultiShufflingScreenshot from "../components/MultiShufflingScreenshot";
 import Logo from "../components/Logo";
+import CookieSettingsButton from "../components/CookieSettingsButton";
 import { usePageTracking, useSectionTracking, useEngagementTracking, useVisibilityTracking, useDeviceTracking } from "../hooks/useAnalytics";
 import { trackAppDownload, trackCTAClick, trackAppStoreRedirect, trackFeatureInteraction } from "../utils/analytics";
 
@@ -432,6 +433,9 @@ export default function Home() {
               >
                 Help & Support
               </Link>
+              <CookieSettingsButton 
+                className="hover:text-white transition-colors"
+              />
             </div>
           </motion.div>
         </div>

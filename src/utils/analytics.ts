@@ -1,5 +1,5 @@
 // Google Analytics tracking utilities
-type GtagCommand = 'config' | 'event' | 'js' | 'set';
+type GtagCommand = 'config' | 'event' | 'js' | 'set' | 'consent';
 type GtagConfigParams = {
   page_path?: string;
   page_title?: string;
@@ -19,22 +19,50 @@ type GtagEventParams = {
   [key: string]: string | number | boolean | undefined;
 };
 
+type GtagConsentParams = {
+  analytics_storage?: 'granted' | 'denied';
+  ad_storage?: 'granted' | 'denied';
+  ad_user_data?: 'granted' | 'denied';
+  ad_personalization?: 'granted' | 'denied';
+  functionality_storage?: 'granted' | 'denied';
+  personalization_storage?: 'granted' | 'denied';
+  security_storage?: 'granted' | 'denied';
+  wait_for_update?: number;
+};
+
 declare global {
   interface Window {
-    gtag: (command: GtagCommand, targetId: string | Date, params?: GtagConfigParams | GtagEventParams | Record<string, unknown>) => void;
+    gtag: (command: GtagCommand, targetId: string | Date | 'default' | 'update', params?: GtagConfigParams | GtagEventParams | GtagConsentParams | Record<string, unknown>) => void;
     dataLayer: Record<string, unknown>[];
   }
 }
 
 // Initialize gtag if not available
-export const gtag = (command: GtagCommand, targetId: string | Date, params?: GtagConfigParams | GtagEventParams | Record<string, unknown>) => {
+export const gtag = (command: GtagCommand, targetId: string | Date | 'default' | 'update', params?: GtagConfigParams | GtagEventParams | GtagConsentParams | Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag(command, targetId, params);
   }
 };
 
+// Check if analytics consent is given
+const hasAnalyticsConsent = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  
+  try {
+    const consent = localStorage.getItem('pixieclean_cookie_consent');
+    if (!consent) return false;
+    
+    const parsedConsent = JSON.parse(consent);
+    return parsedConsent.consent?.analytics === true;
+  } catch {
+    return false;
+  }
+};
+
 // Page view tracking
 export const trackPageView = (url: string, title?: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('config', 'G-7MT1F0ZMGP', {
     page_path: url,
     page_title: title || document.title,
@@ -44,6 +72,8 @@ export const trackPageView = (url: string, title?: string) => {
 
 // App download tracking
 export const trackAppDownload = (platform: 'ios' | 'android', location: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'app_download_click', {
     event_category: 'App Downloads',
     event_label: platform.toUpperCase(),
@@ -63,6 +93,8 @@ export const trackAppDownload = (platform: 'ios' | 'android', location: string) 
 
 // Feature interaction tracking
 export const trackFeatureInteraction = (feature: string, action: string, location?: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'feature_interaction', {
     event_category: 'User Engagement',
     event_label: feature,
@@ -73,6 +105,8 @@ export const trackFeatureInteraction = (feature: string, action: string, locatio
 
 // Section scroll tracking
 export const trackSectionView = (section: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'section_view', {
     event_category: 'User Engagement',
     event_label: section,
@@ -82,6 +116,8 @@ export const trackSectionView = (section: string) => {
 
 // Time on page tracking
 export const trackTimeOnPage = (timeSpent: number, page: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'page_engagement', {
     event_category: 'User Engagement',
     event_label: 'time_on_page',
@@ -92,6 +128,8 @@ export const trackTimeOnPage = (timeSpent: number, page: string) => {
 
 // CTA button clicks
 export const trackCTAClick = (buttonText: string, location: string, platform?: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'cta_click', {
     event_category: 'CTA Interactions',
     event_label: buttonText,
@@ -102,6 +140,8 @@ export const trackCTAClick = (buttonText: string, location: string, platform?: s
 
 // Email/contact interactions
 export const trackContactInteraction = (type: 'email' | 'support', location: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'contact_interaction', {
     event_category: 'Contact',
     event_label: type,
@@ -176,6 +216,8 @@ export const trackAppStoreView = (platform: 'ios' | 'android') => {
 
 // App store redirect tracking
 export const trackAppStoreRedirect = (platform: 'ios' | 'android', source: string) => {
+  if (!hasAnalyticsConsent()) return;
+  
   gtag('event', 'app_store_redirect', {
     event_category: 'App Store Traffic',
     event_label: platform.toUpperCase(),
