@@ -411,31 +411,53 @@ export default function Home() {
               </button>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
-              <Link 
-                href="/privacy" 
-                className="hover:text-white transition-colors"
-                onClick={() => trackFeatureInteraction('Privacy Policy', 'footer_link_click', 'final_cta')}
-              >
-                Privacy Policy
-              </Link>
-              <Link 
-                href="/terms" 
-                className="hover:text-white transition-colors"
-                onClick={() => trackFeatureInteraction('Terms of Service', 'footer_link_click', 'final_cta')}
-              >
-                Terms of Service
-              </Link>
-              <Link 
-                href="/support" 
-                className="hover:text-white transition-colors"
-                onClick={() => trackFeatureInteraction('Help & Support', 'footer_link_click', 'final_cta')}
-              >
-                Help & Support
-              </Link>
-              <CookieSettingsButton 
-                className="hover:text-white transition-colors"
-              />
+            <div className="flex flex-col items-center gap-6">
+              {/* Product Hunt Badge */}
+              <div className="flex justify-center">
+                <a 
+                  href="https://www.producthunt.com/products/pixieclean?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-pixieclean" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => trackFeatureInteraction('Product Hunt Badge', 'external_link_click', 'final_cta')}
+                  className="transition-transform hover:scale-105"
+                >
+                  <img 
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1001148&theme=light&t=1754311708901" 
+                    alt="PixieClean - Clean, organize & optimize your photos | Product Hunt" 
+                    style={{ width: '250px', height: '54px' }} 
+                    width="250" 
+                    height="54" 
+                  />
+                </a>
+              </div>
+              
+              {/* Footer Links */}
+              <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+                <Link 
+                  href="/privacy" 
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackFeatureInteraction('Privacy Policy', 'footer_link_click', 'final_cta')}
+                >
+                  Privacy Policy
+                </Link>
+                <Link 
+                  href="/terms" 
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackFeatureInteraction('Terms of Service', 'footer_link_click', 'final_cta')}
+                >
+                  Terms of Service
+                </Link>
+                <Link 
+                  href="/support" 
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackFeatureInteraction('Help & Support', 'footer_link_click', 'final_cta')}
+                >
+                  Help & Support
+                </Link>
+                <CookieSettingsButton 
+                  className="hover:text-white transition-colors"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
