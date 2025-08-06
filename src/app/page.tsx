@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { 
   Shield, 
   Zap, 
@@ -19,8 +20,10 @@ import ShufflingScreenshot from "../components/ShufflingScreenshot";
 import MultiShufflingScreenshot from "../components/MultiShufflingScreenshot";
 import Logo from "../components/Logo";
 import CookieSettingsButton from "../components/CookieSettingsButton";
+import SaleBanner from "../components/SaleBanner";
 import { usePageTracking, useSectionTracking, useEngagementTracking, useVisibilityTracking, useDeviceTracking } from "../hooks/useAnalytics";
 import { trackAppDownload, trackCTAClick, trackAppStoreRedirect, trackFeatureInteraction } from "../utils/analytics";
+import { useLocationPricing } from "../hooks/useLocationPricing";
 
 export default function Home() {
   // Analytics hooks
@@ -28,6 +31,43 @@ export default function Home() {
   useEngagementTracking();
   useVisibilityTracking();
   useDeviceTracking();
+  
+  // Location-based pricing
+  const { pricingInfo, isLoading } = useLocationPricing();
+  
+  // Android sale countdown timer
+  const [timeLeft, setTimeLeft] = useState<{
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+  }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  const [isAndroidSaleLive, setIsAndroidSaleLive] = useState(false);
+
+  // Android sale start time: August 7th, 2025 00:00 GMT
+  const androidSaleStart = new Date('2025-08-07T00:00:00Z').getTime();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const timeUntilAndroidSale = androidSaleStart - currentTime;
+      
+      if (timeUntilAndroidSale <= 0) {
+        setIsAndroidSaleLive(true);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      } else {
+        const days = Math.floor(timeUntilAndroidSale / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeUntilAndroidSale % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeUntilAndroidSale % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeUntilAndroidSale % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ days, hours, minutes, seconds });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [androidSaleStart]);
 
   // Section tracking refs
   const heroSectionRef = useSectionTracking('hero_section');
@@ -149,8 +189,11 @@ export default function Home() {
     }
   ];
 
-  return (
-            <div className="min-h-screen bg-black text-white" itemScope itemType="https://schema.org/WebPage">
+    return (
+    <div className="min-h-screen bg-black text-white" itemScope itemType="https://schema.org/WebPage">
+      {/* Sale Banner */}
+      <SaleBanner />
+      
       {/* Hero Section */}
       <section ref={heroSectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Gradient */}
@@ -184,6 +227,24 @@ export default function Home() {
           </motion.p>
           
           <motion.div 
+            className="mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg">
+              <Sparkles className="w-4 h-4" />
+              <div className="text-center">
+                <div className="flex items-center gap-2 justify-center">
+                  <span className="line-through text-gray-200">{pricingInfo.originalPriceFormatted}</span>
+                  <span className="text-yellow-300 font-bold text-lg">FREE</span>
+                </div>
+                <div className="text-xs">Limited Time Offer - Save 100%</div>
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -191,23 +252,46 @@ export default function Home() {
           >
             <button 
               onClick={() => handleAppDownload('ios', 'hero_primary', 'https://apps.apple.com/in/app/pixieclean/id6745176117')}
-              className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 glow-hover"
+              className="flex items-center gap-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 glow-hover shadow-lg"
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
               </svg>
-              Download on App Store
+              <div className="text-left">
+                {/* <div className="text-xs line-through opacity-80">{pricingInfo.originalPriceFormatted}</div> */}
+                <div className="font-bold">🎉 FREE NOW</div>
+              </div>
             </button>
             
-            <button 
+            {isAndroidSaleLive ? (
+              <button 
+                onClick={() => handleAppDownload('android', 'hero_primary', 'https://play.google.com/store/apps/details?id=com.nclab.pixieclean')}
+                className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-300 glow-hover shadow-lg"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <div className="text-left">
+                  {/* <div className="text-xs line-through opacity-80">{pricingInfo.originalPriceFormatted}</div> */}
+                  <div className="font-bold">🎉 FREE NOW</div>
+                </div>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            ) : (
+              <button 
               onClick={() => handleAppDownload('android', 'hero_primary', 'https://play.google.com/store/apps/details?id=com.nclab.pixieclean')}
-              className="flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 glow-hover"
-            >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-              </svg>
-              Get it on Google Play
-            </button>
+                className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold opacity-80 cursor-not-allowed"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <div className="text-left">
+                  {/* <div className="text-xs">{pricingInfo.originalPriceFormatted} → FREE</div> */}
+                  <div className="font-bold">⏰ {timeLeft.days > 0 ? `${timeLeft.days}d ${timeLeft.hours}h` : `${timeLeft.hours}h ${timeLeft.minutes}m`}</div>
+                </div>
+                {/* <ArrowRight className="w-5 h-5" /> */}
+              </button>
+            )}
           </motion.div>
         </div>
       </section>
@@ -381,34 +465,56 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Get PixieClean
+              🎉 SAVE {pricingInfo.originalPriceFormatted} - Limited Time Offer
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Every photo cleaned is a memory made brighter ✨
+              Don&apos;t miss this exclusive deal! Get PixieClean for FREE (was {pricingInfo.originalPriceFormatted}) and transform your photo library ✨
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <button 
                 onClick={() => handleAppDownload('ios', 'final_cta', 'https://apps.apple.com/in/app/pixieclean/id6745176117')}
-                className="flex items-center gap-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 glow-hover"
+                className="flex items-center gap-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 glow-hover shadow-lg"
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                 </svg>
-                Download on App Store
+                <div className="text-left">
+                  <div className="text-xs line-through opacity-80">{pricingInfo.originalPriceFormatted}</div>
+                  <div className="font-bold">🎉 FREE NOW</div>
+                </div>
                 <ArrowRight className="w-5 h-5" />
               </button>
               
-              <button 
+              {isAndroidSaleLive ? (
+                <button 
+                  onClick={() => handleAppDownload('android', 'final_cta', 'https://play.google.com/store/apps/details?id=com.nclab.pixieclean')}
+                  className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-300 glow-hover shadow-lg"
+                >
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-xs line-through opacity-80">{pricingInfo.originalPriceFormatted}</div>
+                    <div className="font-bold">🎉 FREE NOW</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              ) : (
+                <button 
                 onClick={() => handleAppDownload('android', 'final_cta', 'https://play.google.com/store/apps/details?id=com.nclab.pixieclean')}
-                className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-300 glow-hover"
-              >
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                </svg>
-                Get it on Google Play
-                <ArrowRight className="w-5 h-5" />
-              </button>
+                  className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full font-semibold opacity-80 cursor-not-allowed"
+                >
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
+                  <div className="text-left">
+                    <div className="text-xs">{pricingInfo.originalPriceFormatted} → FREE</div>
+                    <div className="font-bold">⏰ {timeLeft.days > 0 ? `${timeLeft.days}d ${timeLeft.hours}h` : `${timeLeft.hours}h ${timeLeft.minutes}m`}</div>
+                  </div>
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              )}
             </div>
             
             <div className="flex flex-col items-center gap-6">
