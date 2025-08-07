@@ -64,19 +64,9 @@ export default function ConsentAnalytics() {
           // Initialize consent state
           if (typeof window !== 'undefined') {
             window.dataLayer = window.dataLayer || [];
-            function gtag(command: string, targetId: string | Date, params?: Record<string, unknown>) {
-              window.dataLayer.push({
-                event: command,
-                target: targetId,
-                ...params
-              });
-            }
             
-            // Initialize gtag properly
-            (window as typeof window & { gtag: typeof gtag }).gtag = gtag;
-
             // Set default consent state
-            gtag('consent', 'default', {
+            window.gtag('consent', 'default', {
               analytics_storage: consent?.analytics ? 'granted' : 'denied',
               ad_storage: consent?.marketing ? 'granted' : 'denied',
               ad_user_data: consent?.marketing ? 'granted' : 'denied',
@@ -87,8 +77,8 @@ export default function ConsentAnalytics() {
               wait_for_update: 500,
             });
 
-            gtag('js', new Date());
-            gtag('config', 'G-7MT1F0ZMGP', {
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-7MT1F0ZMGP', {
               page_title: document.title,
               page_location: window.location.href,
               send_page_view: true,
