@@ -73,6 +73,8 @@ export const metadata: Metadata = {
         alt: "PixieClean - AI-powered photo cleanup app",
       },
     ],
+    countryName: "United States",
+    emails: ["support@mypixie.app"],
   },
   twitter: {
     card: "summary_large_image",
@@ -84,6 +86,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://mypixie.app",
+    languages: {
+      'en-US': 'https://mypixie.app',
+    },
   },
   category: "Mobile Apps",
 };
@@ -159,6 +164,72 @@ export default function RootLayout({
           "https://mypixie.app/images/screenshots/device-optimisation1.png",
           "https://mypixie.app/images/screenshots/best-shot-selector1.PNG"
         ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://mypixie.app"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Privacy Policy",
+            "item": "https://mypixie.app/privacy"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Support",
+            "item": "https://mypixie.app/support"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Terms of Service",
+            "item": "https://mypixie.app/terms"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is PixieClean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PixieClean is an AI-powered mobile app that helps you effortlessly declutter, organize, and optimize your photo galleries while keeping your data 100% private on-device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does PixieClean protect my privacy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PixieClean processes all your photos on-device, meaning your data never leaves your phone. No cloud storage, no data sharing, complete privacy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What features does PixieClean offer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "PixieClean offers smart duplicate detection, best shot selection, device-based optimization, and AI-powered photo organization to save up to 90% storage space."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is PixieClean free to download?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, PixieClean is currently available for free download on both iOS App Store and Google Play Store as part of a limited time offer."
+            }
+          }
+        ]
       }
     ]
   };
@@ -169,6 +240,31 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        {/* Performance Monitoring */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Core Web Vitals monitoring
+              if ('performance' in window) {
+                window.addEventListener('load', function() {
+                  setTimeout(function() {
+                    const navigation = performance.getEntriesByType('navigation')[0];
+                    const paint = performance.getEntriesByType('paint');
+                    
+                    // Send to analytics if available
+                    if (window.gtag) {
+                      window.gtag('event', 'web_vitals', {
+                        event_category: 'Web Vitals',
+                        event_label: 'CLS',
+                        value: Math.round(performance.getEntriesByName('CLS')[0]?.value * 1000) || 0
+                      });
+                    }
+                  }, 0);
+                });
+              }
+            `,
+          }}
         />
       </head>
       <body

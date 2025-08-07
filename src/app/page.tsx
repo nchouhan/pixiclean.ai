@@ -222,6 +222,16 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            itemProp="description"
+          >
+            Love your photo library again. Effortlessly Clean, Organise, Optimise — all on-device.
+          </motion.p>
+          
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
             Love your photo library again. Effortlessly Clean, Organise, Optimise — all on-device.
           </motion.p>
@@ -510,6 +520,7 @@ export default function Home() {
                     style={{ width: '250px', height: '54px' }} 
                     width="250" 
                     height="54" 
+                    loading="lazy"
                   />
                 </a>
               </div>
