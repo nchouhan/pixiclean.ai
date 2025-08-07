@@ -94,53 +94,10 @@ export default function SaleBanner({ onClose }: SaleBannerProps) {
                 
                                   <div className="flex items-center gap-6 text-sm">
                     {/* iOS Status - Always FREE */}
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-300" />
-                      <div>
-                        {/* <div className="flex items-center gap-2">
-                          <span className="line-through text-gray-300">{pricingInfo.originalPriceFormatted}</span>
-                          <span className="text-green-300 font-bold">FREE</span>
-                        </div> */}
-                        <span className="text-xs text-gray-300">iOS - Limited Time</span>
-                      </div>
-                    </div>
+                    
                     
                     {/* Android Status - Countdown or FREE */}
-                    <div className="flex items-center gap-3">
-                      {isAndroidSaleLive ? (
-                        <>
-                          <CheckCircle className="w-4 h-4 text-green-300" />
-                          <div>
-                            {/* <div className="flex items-center gap-2">
-                              <span className="line-through text-gray-300">{pricingInfo.originalPriceFormatted}</span>
-                              <span className="text-green-300 font-bold">FREE</span>
-                            </div> */}
-                            <span className="text-xs text-gray-300">Android - Limited Time</span>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <Clock className="w-4 h-4 text-yellow-300 animate-pulse" />
-                          <div>
-                            {/* <div className="flex items-center gap-2">
-                              <span className="text-yellow-300 font-bold">{pricingInfo.originalPriceFormatted} → FREE</span>
-                            </div> */}
-                            <span className="text-xs text-gray-300">Android Sale Starts In:</span>
-                            <div className="flex gap-1 font-mono text-xs mt-1">
-                              <span className="bg-black/20 px-1 rounded">
-                                {timeLeft.days.toString().padStart(2, '0')}d
-                              </span>
-                              <span className="bg-black/20 px-1 rounded">
-                                {timeLeft.hours.toString().padStart(2, '0')}h
-                              </span>
-                              <span className="bg-black/20 px-1 rounded">
-                                {timeLeft.minutes.toString().padStart(2, '0')}m
-                              </span>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    
                   </div>
               </div>
             </div>
