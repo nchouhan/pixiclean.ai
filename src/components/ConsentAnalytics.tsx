@@ -1,12 +1,11 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCookieConsent } from '../contexts/CookieConsentContext';
 
 export default function ConsentAnalytics() {
   const { consent, hasConsented } = useCookieConsent();
-  const [analyticsLoaded, setAnalyticsLoaded] = useState(false);
 
   useEffect(() => {
     // Listen for consent changes
@@ -25,17 +24,18 @@ export default function ConsentAnalytics() {
           security_storage: 'granted', // Always granted for necessary cookies
         });
 
-        // If analytics was just enabled, initialize tracking
-        if (newConsent.analytics && !analyticsLoaded) {
+        // If analytics was just enabled, send page view
+        if (newConsent.analytics) {
           window.gtag('config', 'G-7MT1F0ZMGP', {
             page_title: document.title,
             page_location: window.location.href,
             send_page_view: true,
             allow_google_signals: newConsent.marketing,
             allow_ad_personalization_signals: newConsent.marketing,
-            cookie_flags: 'SameSite=None;Secure'
           });
-          setAnalyticsLoaded(true);
+          console.log('✅ Analytics consent granted - tracking enabled');
+        } else {
+          console.log('⏸️ Analytics consent denied - tracking disabled');
         }
       }
     };
@@ -45,52 +45,39 @@ export default function ConsentAnalytics() {
     return () => {
       window.removeEventListener('cookieConsentChanged', handleConsentChange as EventListener);
     };
-  }, [analyticsLoaded]);
-
-  // Only load Google Analytics if user has consented and analytics is enabled
-  const shouldLoadAnalytics = hasConsented && consent?.analytics;
-
-  if (!shouldLoadAnalytics) {
-    return null;
-  }
+  }, [consent, hasConsented]);
 
   return (
     <>
-      {/* Google Analytics */}
+      {/* Google Analytics - Always Loaded (Standard Implementation) */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-7MT1F0ZMGP"
         strategy="afterInteractive"
         onLoad={() => {
-          // Initialize dataLayer
           if (typeof window !== 'undefined') {
+            // Standard Google Analytics initialization
             window.dataLayer = window.dataLayer || [];
             
             // Wait for gtag to be available
             const initializeAnalytics = () => {
               if (typeof window.gtag === 'function') {
-                // Set default consent state
+                // Initialize with denied consent by default (privacy-first)
                 window.gtag('consent', 'default', {
-                  analytics_storage: consent?.analytics ? 'granted' : 'denied',
-                  ad_storage: consent?.marketing ? 'granted' : 'denied',
-                  ad_user_data: consent?.marketing ? 'granted' : 'denied',
-                  ad_personalization: consent?.marketing ? 'granted' : 'denied',
-                  functionality_storage: consent?.preferences ? 'granted' : 'denied',
-                  personalization_storage: consent?.preferences ? 'granted' : 'denied',
+                  analytics_storage: 'denied',
+                  ad_storage: 'denied',
+                  ad_user_data: 'denied',
+                  ad_personalization: 'denied',
+                  functionality_storage: 'denied',
+                  personalization_storage: 'denied',
                   security_storage: 'granted',
-                  wait_for_update: 500,
                 });
 
                 window.gtag('js', new Date());
                 window.gtag('config', 'G-7MT1F0ZMGP', {
-                  page_title: document.title,
-                  page_location: window.location.href,
-                  send_page_view: true,
-                  allow_google_signals: consent?.marketing || false,
-                  allow_ad_personalization_signals: consent?.marketing || false,
-                  cookie_flags: 'SameSite=None;Secure'
+                  send_page_view: false, // Don't send page view until consent
                 });
                 
-                setAnalyticsLoaded(true);
+                console.log('✅ Google Analytics script loaded (consent required)');
               } else {
                 // Retry after a short delay
                 setTimeout(initializeAnalytics, 100);
