@@ -61,33 +61,44 @@ export default function ConsentAnalytics() {
         src="https://www.googletagmanager.com/gtag/js?id=G-7MT1F0ZMGP"
         strategy="afterInteractive"
         onLoad={() => {
-          // Initialize consent state
+          // Initialize dataLayer
           if (typeof window !== 'undefined') {
             window.dataLayer = window.dataLayer || [];
             
-            // Set default consent state
-            window.gtag('consent', 'default', {
-              analytics_storage: consent?.analytics ? 'granted' : 'denied',
-              ad_storage: consent?.marketing ? 'granted' : 'denied',
-              ad_user_data: consent?.marketing ? 'granted' : 'denied',
-              ad_personalization: consent?.marketing ? 'granted' : 'denied',
-              functionality_storage: consent?.preferences ? 'granted' : 'denied',
-              personalization_storage: consent?.preferences ? 'granted' : 'denied',
-              security_storage: 'granted',
-              wait_for_update: 500,
-            });
+            // Wait for gtag to be available
+            const initializeAnalytics = () => {
+              if (typeof window.gtag === 'function') {
+                // Set default consent state
+                window.gtag('consent', 'default', {
+                  analytics_storage: consent?.analytics ? 'granted' : 'denied',
+                  ad_storage: consent?.marketing ? 'granted' : 'denied',
+                  ad_user_data: consent?.marketing ? 'granted' : 'denied',
+                  ad_personalization: consent?.marketing ? 'granted' : 'denied',
+                  functionality_storage: consent?.preferences ? 'granted' : 'denied',
+                  personalization_storage: consent?.preferences ? 'granted' : 'denied',
+                  security_storage: 'granted',
+                  wait_for_update: 500,
+                });
 
-            window.gtag('js', new Date());
-            window.gtag('config', 'G-7MT1F0ZMGP', {
-              page_title: document.title,
-              page_location: window.location.href,
-              send_page_view: true,
-              allow_google_signals: consent?.marketing || false,
-              allow_ad_personalization_signals: consent?.marketing || false,
-              cookie_flags: 'SameSite=None;Secure'
-            });
+                window.gtag('js', new Date());
+                window.gtag('config', 'G-7MT1F0ZMGP', {
+                  page_title: document.title,
+                  page_location: window.location.href,
+                  send_page_view: true,
+                  allow_google_signals: consent?.marketing || false,
+                  allow_ad_personalization_signals: consent?.marketing || false,
+                  cookie_flags: 'SameSite=None;Secure'
+                });
+                
+                setAnalyticsLoaded(true);
+              } else {
+                // Retry after a short delay
+                setTimeout(initializeAnalytics, 100);
+              }
+            };
             
-            setAnalyticsLoaded(true);
+            // Start initialization
+            initializeAnalytics();
           }
         }}
       />
