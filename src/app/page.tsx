@@ -192,7 +192,7 @@ export default function Home() {
     return (
     <div className="min-h-screen bg-black text-white" itemScope itemType="https://schema.org/WebPage">
       {/* Sale Banner */}
-      <SaleBanner />
+      {/*<SaleBanner />*/}
       
       {/* Hero Section */}
       <section ref={heroSectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -228,7 +228,7 @@ export default function Home() {
             Love your photo library again. Effortlessly Clean, Organise, Optimise — all on-device.
           </motion.p>
           
-          <motion.div 
+          {/* <motion.div 
             className="mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -244,7 +244,7 @@ export default function Home() {
                 <div className="text-xs">Limited Time Offer - Save 100%</div>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
           
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -455,12 +455,12 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            {/* <h2 className="text-4xl md:text-5xl font-bold mb-6">
               🎉 SAVE {pricingInfo.originalPriceFormatted} - Limited Time Offer
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            </h2> */}
+            {/* <p className="text-xl text-gray-300 mb-8">
               Don&apos;t miss this exclusive deal! Get PixieClean for FREE (was {pricingInfo.originalPriceFormatted}) and transform your photo library ✨
-            </p>
+            </p> */}
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <button 
